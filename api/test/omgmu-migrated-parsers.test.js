@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { extractGroupCodes, parseSourceFilename } from "../src/adapters/omgmu/catalog.mjs";
 import { parseCombinedRotationGeometry } from "../src/adapters/omgmu/combined-rotation-table.mjs";
+import { buildCourseLectureListCanonicalBatch } from "../src/adapters/omgmu/course-lecture-list.mjs";
 import { parseFifthCourseBlocks } from "../src/adapters/omgmu/cycle-parser.mjs";
 import { parseCycleRotationGeometry } from "../src/adapters/omgmu/cycle-rotation-grid.mjs";
 import { parseFourthCourseLectures } from "../src/adapters/omgmu/fourth-parser.mjs";
@@ -28,6 +29,13 @@ test("migrated fourth-course lecture parser resolves an explicit Monday date", (
   assert.equal(records[0].discipline, "Неврология");
   assert.deepEqual(records[0].dates, ["2026-04-06"]);
   assert.equal(records[0].status, "ok");
+});
+
+test("migrated course lecture profile fails closed on an empty source", () => {
+  assert.throws(
+    () => buildCourseLectureListCanonicalBatch("", {}),
+    (error) => error?.code === "OMG_COURSE_LECTURE_LIST_EMPTY",
+  );
 });
 
 test("migrated fifth-course fixed-column parser resolves a lecture block", () => {
