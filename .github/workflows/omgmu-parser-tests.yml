@@ -1,10 +1,11 @@
-name: OmGMU parser tests
+name: OmGMU tenant tests
 
 on:
   pull_request:
     paths:
       - "api/src/adapters/omgmu/**"
       - "api/test/omgmu-migrated-parsers.test.js"
+      - "api/test/omgmu-review-boundary.test.js"
       - ".github/workflows/omgmu-parser-tests.yml"
   push:
     branches:
@@ -12,13 +13,14 @@ on:
     paths:
       - "api/src/adapters/omgmu/**"
       - "api/test/omgmu-migrated-parsers.test.js"
+      - "api/test/omgmu-review-boundary.test.js"
       - ".github/workflows/omgmu-parser-tests.yml"
 
 permissions:
   contents: read
 
 jobs:
-  parser-tests:
+  tenant-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,5 +29,5 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Run migrated parser tests
-        run: node --test api/test/omgmu-migrated-parsers.test.js
+      - name: Run tenant unit tests
+        run: node --test api/test/omgmu-migrated-parsers.test.js api/test/omgmu-review-boundary.test.js
