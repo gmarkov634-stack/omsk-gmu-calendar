@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test",
-    "test:source": "node --test api/test/omgmu-discover.test.js api/test/omgmu-download.test.js api/test/omgmu-source-version.test.js api/test/omgmu-source-adapter.test.js",
+    "test:source": "node --test api/test/omgmu-discover.test.js api/test/omgmu-download.test.js api/test/omgmu-source-version.test.js api/test/omgmu-source-adapter.test.js api/test/omgmu-source-profiles.test.js",
     "source:discover": "node api/tools/omgmu-discover.mjs",
     "source:download": "node api/tools/omgmu-download.mjs"
   }
