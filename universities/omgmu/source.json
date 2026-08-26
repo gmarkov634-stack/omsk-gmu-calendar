@@ -1,7 +1,0 @@
-{
-  "tenant": "omgmu",
-  "schedule_page": "https://omsk-osma.ru/studentam/raspisanie-zanyatiy",
-  "authority": "official-university-site",
-  "discovery_status": "existing-adapter-source",
-  "publication_enabled": false
-}
