@@ -43,6 +43,8 @@ export function buildWeeklyGridCanonicalCandidate(geometry, { metadata, source, 
     registry: reviewRegistry,
   });
 
+  // O65 runs only after parser + source-bound review have produced validated
+  // independent source-series for this exact official PDF revision.
   const materialized = materializeWeeklyUserSeries(reviewed.series, { group, maxGapMinutes: 5 });
   if (!materialized.sourceSeries.length) {
     const error = new Error(`weekly_grid produced no source series for group ${group}`);
