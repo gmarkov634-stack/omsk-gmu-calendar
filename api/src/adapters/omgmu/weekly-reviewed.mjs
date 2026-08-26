@@ -46,6 +46,13 @@ function applyResolution(series, resolution, registry, entry) {
   return output;
 }
 
+/**
+ * Apply an already-approved, exact-source manual review to one group's parsed
+ * weekly source-series. This layer is deliberately source-bound: changed PDF
+ * hash, group/course/stream mismatch, missing machine-readable resolution, or
+ * a resolution matching anything other than exactly one series all fail
+ * closed. It does not create a new parsing rule.
+ */
 export function applyApprovedWeeklyReview(sourceSeries, { metadata, source, registry } = {}) {
   if (!registry || registry.version !== 2 || registry.university !== "omgmu" || !Array.isArray(registry.groups)) {
     return { series: sourceSeries, review: null };
