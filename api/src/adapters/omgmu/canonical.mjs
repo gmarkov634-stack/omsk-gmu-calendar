@@ -22,6 +22,8 @@ const KIND_TO_TYPE = Object.freeze({
   physical_education: "physical_education",
   other: "other",
   unknown: "unknown",
+  // `cycle` is a structural source type in ОмГМУ, not a canonical lesson type.
+  // Never silently turn it into `practice` without source evidence.
   cycle: "unknown",
 });
 
@@ -207,6 +209,14 @@ function eventForDate({ metadata, source, series, date }) {
   };
 }
 
+/**
+ * Canonical boundary for ОмГМУ.
+ *
+ * The PDF/profile parser owns source interpretation and O-rules. This adapter
+ * only converts already-resolved source series into the shared
+ * schedule-batch/v1 contract. It does not assign event/version IDs and does
+ * not publish anything.
+ */
 export function buildOmgmuCanonicalBatch({ metadata, source, series }) {
   if (!metadata || typeof metadata !== "object") throw new TypeError("metadata is required");
   if (!source || typeof source !== "object") throw new TypeError("source is required");
