@@ -91,6 +91,10 @@ function expandDates(value, weekday, { year, calendarExceptions }) {
     } else {
       const date = isoDate(year, atom.sm, atom.sd);
       if (new Date(`${date}T00:00:00Z`).getUTCDay() !== weekday) {
+        // Preserve an explicit source date instead of dropping the whole
+        // source-series. The weekday/date contradiction remains fail-closed
+        // through needs_review and can be inspected for exactly the affected
+        // geometry groups.
         warnings.push(`weekday mismatch: ${date}`);
       }
       if (!calendarExceptions.has(date)) dates.add(date);
