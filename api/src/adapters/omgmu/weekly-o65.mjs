@@ -113,6 +113,19 @@ function mergePair(left, right) {
   };
 }
 
+/**
+ * Materialize weekly_grid source-series into user-visible one-date series.
+ *
+ * Source series are never mutated or discarded: `sourceSeries` in the return
+ * value remains the independent parser result. `userSeries` may merge only
+ * adjacent, already-valid occurrences under O65. The merged occurrence keeps
+ * structured evidence from every source series in `sourceSeriesEvidence` and
+ * unions all PDF references for canonical traceability.
+ *
+ * The default five-minute gap is intentionally limited to the currently
+ * verified O65 pattern (15:55 -> 16:00). A broader gap requires new source
+ * evidence instead of silent generalization.
+ */
 export function materializeWeeklyUserSeries(sourceSeries, { group, maxGapMinutes = 5 } = {}) {
   const groupCode = String(group || "").trim();
   if (!groupCode) throw new TypeError("O65 materialization requires group");
