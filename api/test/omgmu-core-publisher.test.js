@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
+// CI content retrigger: 2026-08-26 publisher-boundary verification.
 import {
   omgmuProductionPublisherBoundary,
   parseExpectedCurrentVersion,
